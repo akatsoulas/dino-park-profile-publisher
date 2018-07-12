@@ -1,0 +1,36 @@
+{
+  "name": "dino-park-profile-publisher",
+  "version": "0.0.1",
+  "description": "Profile Publisher Service for the new Mozillians aka Dino Park",
+  "main": "index.js",
+  "browser": "main.js",
+  "module": "main.js",
+  "scripts": {
+    "dev": "node -r esm index.js",
+    "pretest": "eslint --ignore-path .gitignore .",
+    "test": "mocha -r esm"
+  },
+  "author": "Florian Merz <fmerz@mozilla.com>",
+  "license": "MPL-2.0",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "axios-retry": "^3.1.1",
+    "body-parser": "^1.18.3",
+    "esm": "^3.0.66",
+    "express": "^4.16.3",
+    "winston": "^3.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "mocha": "^5.2.0",
+    "moxios": "^0.4.0",
+    "prettier": "1.13.7"
+  },
+  "directories": {
+    "lib": "lib"
+  }
+}
