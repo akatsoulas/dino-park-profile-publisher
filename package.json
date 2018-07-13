@@ -21,13 +21,13 @@
     "winston": "^3.0.0"
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.15.0",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.2",
     "mocha": "^5.2.0",
-    "moxios": "^0.4.0",
     "prettier": "1.13.7"
   },
   "directories": {
