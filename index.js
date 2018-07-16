@@ -1,12 +1,11 @@
-import express from "express";
-import bodyParser from "body-parser";
 import { load, logger } from "./lib/config";
+import App from "./lib/app";
 
 async function main() {
   try {
-    const app = express();
-    app.use(bodyParser.json());
     const cfg = await load();
+
+    const app = App(cfg);
 
     app.listen(cfg.port, () => undefined);
   } catch (e) {

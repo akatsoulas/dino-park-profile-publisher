@@ -1,10 +1,11 @@
 const EMPTY = {
-  cisUpdateUrl: "",
-  cisStatusUrl: "",
-  cisPersonApiUrl: "",
+  port: 8080,
+  cisUpdateUrl: "/",
+  cisStatusUrl: "/",
+  cisPersonApiUrl: "/",
   cisStatusTimeout: 10,
   cisStatusRetryCount: 3,
-  personApiUrl: ""
+  personApiUrl: "/"
 };
 
 Object.freeze(EMPTY);

@@ -1,7 +1,7 @@
 /* global describe it beforeEach afterEach */
 import "mocha";
 import chai from "chai";
-import ChaiAsPromised from "chai-as-promised";
+import chaiAsPromised from "chai-as-promised";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ import UserUpdate from "../lib/userupdate";
 import CallError from "../lib/error";
 import { EMPTY } from "./configs";
 
-chai.use(ChaiAsPromised);
+chai.use(chaiAsPromised);
 chai.should();
 
 describe("Handle updates from users", () => {
@@ -56,7 +56,15 @@ describe("Handle updates from users", () => {
     it("fail on 404", () => {
       const updater = new UserUpdate(EMPTY);
 
-      mock.onPost().replyOnce(404, "");
+      mock.onPost().replyOnce(404, null);
+
+      return updater.publishToCIS().should.be.rejected;
+    });
+
+    it("fail on empty response", () => {
+      const updater = new UserUpdate(EMPTY);
+
+      mock.onPost().replyOnce(200, null);
 
       return updater.publishToCIS().should.be.rejected;
     });
@@ -109,6 +117,30 @@ describe("Handle updates from users", () => {
         .replyOnce(200, { userId });
 
       return updater.pollUpdateId(updateId).should.eventually.be.equal(userId);
+    });
+
+    it("fail on empty response", () => {
+      const updateId = "abcd1234";
+      const userId = "deadbeef";
+      const updater = new UserUpdate(EMPTY);
+
+      mock.onGet().reply(200, null);
+
+      return updater
+        .pollUpdateId(updateId)
+        .should.be.rejectedWith(CallError, /FAILED/);
+    });
+
+    it("fail on error response", () => {
+      const updateId = "abcd1234";
+      const userId = "deadbeef";
+      const updater = new UserUpdate(EMPTY);
+
+      mock.onGet().reply(200, { error: "Anything" });
+
+      return updater
+        .pollUpdateId(updateId)
+        .should.be.rejectedWith(CallError, /FAILED/);
     });
 
     it("fail poll after 3 attempts", () => {
