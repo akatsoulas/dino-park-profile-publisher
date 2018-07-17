@@ -48,9 +48,7 @@ describe("Handle updates from users", () => {
 
       mock.onPost().replyOnce(200, data);
 
-      return updater
-        .publishToCIS()
-        .then(updateId => updateId.should.be.equal(data.updateId));
+      return updater.publishToCIS().should.eventually.be.equal(data.updateId);
     });
 
     it("fail on 404", () => {
