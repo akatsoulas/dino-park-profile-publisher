@@ -3,10 +3,11 @@ import App from "./lib/app";
 
 async function main() {
   try {
-    const cfg = await load();
+    const cfg = await load("config.json");
 
     const app = App(cfg);
 
+    logger.info(`starting to serve on port: ${cfg.port}`);
     app.listen(cfg.port, () => undefined);
   } catch (e) {
     logger.error(`Something went batshit wrong: ${e}`);

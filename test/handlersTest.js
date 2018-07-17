@@ -164,13 +164,12 @@ describe("handlers", () => {
     it("fails to publish to orgchart service", () => {
       const userId = "deadbeef";
       const updatedProfile = { userId, something: "else" };
-      const updater = new ExternalUpdate(EMPTY);
 
       mock.onGet().replyOnce(200, updatedProfile);
       mock.onPost().replyOnce(200, {});
       mock.onPost().replyOnce(503, {});
 
-      const handler = updater.handler();
+      const handler = ExternalUpdate.createHandler(EMPTY);
       const req = createRequest({ method: "POST", body: { userId } });
       const res = createResponse({
         eventEmitter: EventEmitter
