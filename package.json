@@ -32,7 +32,8 @@
     "mocha": "^5.2.0",
     "mock-fs": "^4.5.0",
     "node-mocks-http": "^1.7.0",
-    "prettier": "1.13.7"
+    "prettier": "1.13.7",
+    "tmp": "0.0.33"
   },
   "directories": {
     "lib": "lib"
