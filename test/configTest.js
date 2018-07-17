@@ -1,13 +1,14 @@
 import { promisify } from "util";
 import fs from "fs";
 
-import { validateConfig, load } from "../lib/config";
+import { validateConfig, load, int, url } from "../lib/config";
 import { EMPTY } from "./configs";
 
 import chai from "chai";
 import chaiAsPromised from "chai-as-promised";
 import mock from "mock-fs";
 import tmp from "tmp";
+import { doesNotReject } from "assert";
 
 chai.use(chaiAsPromised);
 chai.should();
@@ -19,11 +20,14 @@ describe("everything configy", () => {
     });
 
     it("error on empty config", () => {
-      (() => validateConfig({})).should.throw(Error, /missing/);
+      return (() => validateConfig({})).should.throw(Error, /missing/);
     });
 
     it("error on null port", () => {
-      (() => validateConfig({ port: null })).should.throw(Error, /missing/);
+      return (() => validateConfig({ port: null })).should.throw(
+        Error,
+        /should/
+      );
     });
   });
 
@@ -32,24 +36,35 @@ describe("everything configy", () => {
       mock.restore();
     });
 
-    function mkConfig(cfg) {
-      return async () => (typeof cfg === "string" ? cfg : JSON.stringify(cfg));
-    }
-
     it("validate valid config", done => {
       tmp.file((_, path, fd) =>
         promisify(fs.write)(fd, JSON.stringify(EMPTY))
           .then(() => load(path).should.eventually.be.deep.equal(EMPTY))
           .then(() => done())
+          .catch(e => done(e))
       );
     });
 
     it("error on empty config", done => {
       tmp.file((_, path, fd) =>
         promisify(fs.write)(fd, JSON.stringify({}))
-          .then(() => load(path).should.throw)
+          .then(() => load(path).should.be.rejected)
           .then(() => done())
+          .catch(e => done(e))
       );
+    });
+  });
+
+  describe("validation", () => {
+    it("int", () => {
+      (() => int("foo")).should.throw();
+      (() => int(2)).should.not.throw();
+    });
+
+    it("url", () => {
+      (() => url("http://foo.bar")).should.not.throw();
+      (() => url("foo.com")).should.throw();
+      (() => url(2)).should.throw();
     });
   });
 });

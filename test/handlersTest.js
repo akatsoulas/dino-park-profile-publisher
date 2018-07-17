@@ -7,7 +7,7 @@ import chaiAsPromised from "chai-as-promised";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 
-import UserUpdate from "../lib/userupdate";
+import UserUpdate from "../lib/userUpdate";
 import { EMPTY } from "./configs";
 import { createRequest, createResponse } from "node-mocks-http";
 
@@ -38,9 +38,9 @@ describe("Handle updates from users", () => {
       const updater = new UserUpdate(EMPTY);
 
       mock.onPost().replyOnce(200, { updateId });
-      mock.onGet(`${updateId}`).replyOnce(404);
-      mock.onGet(`${updateId}`).replyOnce(200, { userId });
-      mock.onGet(`${userId}`).replyOnce(200, updatedProfile);
+      mock.onGet().replyOnce(404);
+      mock.onGet().replyOnce(200, { userId });
+      mock.onGet().replyOnce(200, updatedProfile);
 
       const handler = updater.handler();
       const req = createRequest({ method: "POST", body: userUpdate });
@@ -69,8 +69,8 @@ describe("Handle updates from users", () => {
       const updatedProfile = { updateId, something: "else" };
 
       mock.onPost().replyOnce(200, { updateId });
-      mock.onGet(`${updateId}`).replyOnce(404);
-      mock.onGet(`${updateId}`).replyOnce(503);
+      mock.onGet().replyOnce(404);
+      mock.onGet().replyOnce(503);
 
       const handler = UserUpdate.createHandler(EMPTY);
       const req = createRequest({ method: "POST", body: userUpdate });

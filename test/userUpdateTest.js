@@ -5,7 +5,7 @@ import chaiAsPromised from "chai-as-promised";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 
-import UserUpdate from "../lib/userupdate";
+import UserUpdate from "../lib/userUpdate";
 import CallError from "../lib/error";
 import { EMPTY } from "./configs";
 
