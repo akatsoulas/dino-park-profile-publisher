@@ -15,8 +15,8 @@ import { createRequest, createResponse } from "node-mocks-http";
 chai.use(chaiAsPromised);
 chai.should();
 
-describe("handlers", () => {
-  describe("Handle updates from users", () => {
+describe("Express handlers", () => {
+  describe("handle updates from users", () => {
     let mock;
     before(() => {
       mock = new MockAdapter(axios);

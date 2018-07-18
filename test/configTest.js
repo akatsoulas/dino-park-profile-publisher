@@ -13,7 +13,7 @@ import { doesNotReject } from "assert";
 chai.use(chaiAsPromised);
 chai.should();
 
-describe("everything configy", () => {
+describe("Everything configy", () => {
   describe("config validation", () => {
     it("validate valid config", () => {
       return validateConfig(EMPTY).should.be.deep.equal(EMPTY);

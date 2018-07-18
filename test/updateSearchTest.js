@@ -13,7 +13,7 @@ chai.should();
 
 const searchService = updateSearch(EMPTY);
 
-describe("get user profile from person api", () => {
+describe("Send user profile update to search", () => {
   let mock;
   before(() => {
     mock = new MockAdapter(axios);

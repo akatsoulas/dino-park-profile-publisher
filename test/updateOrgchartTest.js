@@ -13,7 +13,7 @@ chai.should();
 
 const orgchartService = updateOrgchart(EMPTY);
 
-describe("get user profile from person api", () => {
+describe("Send user profile update to orgchart", () => {
   let mock;
   before(() => {
     mock = new MockAdapter(axios);

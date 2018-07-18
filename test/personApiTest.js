@@ -13,7 +13,7 @@ chai.should();
 
 const getProfileByUserId = personApi(EMPTY);
 
-describe("get user profile from person api", () => {
+describe("Get user profile from person api", () => {
   let mock;
   before(() => {
     mock = new MockAdapter(axios);

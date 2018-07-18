@@ -1,6 +1,6 @@
 {
   "port": 8080,
-  "cisUpdateUrl": "http://localhost:8888/cisUpdate/",
+  "cisUpdateUrl": "http://localhost:8888/cisUpdate",
   "cisStatusUrl": "http://localhost:8888/cisStatus/",
   "cisStatusTimeout": 10,
   "cisStatusRetryCount": 3,
